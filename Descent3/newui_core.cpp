@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/newui_core.cpp $
  * $Revision: 64 $
  * $Date: 10/21/99 5:05p $
@@ -1299,7 +1317,8 @@ void newuiSheet::Realize() {
       gy = desc->parm.s[1] + m_sy;
       if (desc->title) {
         text = new UIText;
-        text->Create(m_parent, &UITextItem(MONITOR9_NEWUI_FONT, desc->title, NEWUI_MONITORFONT_COLOR), gx, gy);
+        UITextItem item{MONITOR9_NEWUI_FONT, desc->title, NEWUI_MONITORFONT_COLOR};
+        text->Create(m_parent, &item, gx, gy);
         desc->obj.gadget = text;
 
         // determine pixel offset to first control if we stuffed the offset into desc->id (-1 = default)
@@ -1324,37 +1343,40 @@ void newuiSheet::Realize() {
       last_toggle_index = -1;
       break;
 
-    case GADGET_STATIC_TXT:
+    case GADGET_STATIC_TXT: {
       text = new UIText;
-      text->Create(m_parent, &UITextItem(MONITOR9_NEWUI_FONT, desc->title, NEWUI_MONITORFONT_COLOR), gx, gy);
+      UITextItem item{MONITOR9_NEWUI_FONT, desc->title, NEWUI_MONITORFONT_COLOR};
+      text->Create(m_parent, &item, gx, gy);
       if (horizontal_align)
         gx += text->W() + 2;
       else
         gy += text->H();
       desc->obj.gadget = text;
       break;
-
-    case GADGET_CHANGEABLE_TXT:
+    }
+    case GADGET_CHANGEABLE_TXT: {
       text = new UIText;
-      text->Create(m_parent, &UITextItem(MONITOR9_NEWUI_FONT, (const char *)desc->parm.p, NEWUI_MONITORFONT_COLOR), gx,
-                   gy);
+      UITextItem item{MONITOR9_NEWUI_FONT, (const char *)desc->parm.p, NEWUI_MONITORFONT_COLOR};
+      text->Create(m_parent, &item, gx, gy);
       if (horizontal_align)
         gx += text->W() + 2;
       else
         gy += text->H();
       desc->obj.text = text;
       break;
+    }
 
-    case GADGET_STATIC_BMP:
+    case GADGET_STATIC_BMP: {
       bmp = new UIStatic;
-      bmp->Create(m_parent, &UIBitmapItem(desc->parm.i), gx, gy, 10, 10);
+      UIBitmapItem item{desc->parm.i};
+      bmp->Create(m_parent, &item, gx, gy, 10, 10);
       if (horizontal_align)
         gx += bmp->W() + 2;
       else
         gy += bmp->H();
       desc->obj.gadget = bmp;
       break;
-
+    }
     case GADGET_BUTTON:
       btn = new newuiButton;
       btn->Create(m_parent, desc->id, desc->title, gx, gy, desc->parm.i);
@@ -1646,7 +1668,7 @@ void newuiSheet::Unrealize() {
 
 //	refreshes gadget states with values passed to the pointers returned by the below functions.
 void newuiSheet::UpdateChanges() {
-  int i, first_radio_index;
+  int i, first_radio_index = 0;
 
   ASSERT(m_realized);
 
@@ -1702,9 +1724,11 @@ void newuiSheet::UpdateChanges() {
       }
       break;
 
-    case GADGET_CHANGEABLE_TXT:
-      desc->obj.text->SetTitle(&UITextItem(MONITOR9_NEWUI_FONT, (const char *)desc->parm.p, NEWUI_MONITORFONT_COLOR));
+    case GADGET_CHANGEABLE_TXT: {
+      UITextItem item{MONITOR9_NEWUI_FONT, (const char *)desc->parm.p, NEWUI_MONITORFONT_COLOR};
+      desc->obj.text->SetTitle(&item);
       break;
+    }
     }
     desc->changed = false;
   }
@@ -2104,7 +2128,8 @@ newuiButton::newuiButton() {
 }
 
 void newuiButton::Create(UIWindow *menu, short id, const char *name, short x, short y, short flags) {
-  UIButton::Create(menu, id, &UITextItem(""), x, y, 10, 8, flags | UIF_FIT);
+  UITextItem item{""};
+  UIButton::Create(menu, id, &item, x, y, 10, 8, flags | UIF_FIT);
 
   if (flags & NEWUI_BTNF_FRAMED) {
     ASSERT(!(flags & NEWUI_BTNF_LONG)); // remove this if art is added.
@@ -2379,7 +2404,8 @@ void newuiCheckBox::Create(UIWindow *wnd, short id, const char *name, short x, s
   m_bkg = Newui_resources.Load(is_long ? NEWUI_LCHKBTN_FILE : NEWUI_CHKBTN_FILE);
   m_litbkg = Newui_resources.Load(is_long ? NEWUI_LCHKBTNLIT_FILE : NEWUI_CHKBTNLIT_FILE);
 
-  UICheckBox::Create(wnd, id, &UITextItem(""), x, y, 10, 8, UIF_FIT);
+  UITextItem item{""};
+  UICheckBox::Create(wnd, id, &item, x, y, 10, 8, UIF_FIT);
   newuiButton::InitStates(name, is_long);
 }
 
@@ -2396,7 +2422,8 @@ void newuiRadioButton::Create(UIWindow *wnd, UIRadioButton *prev_rb, short id, c
   m_bkg = Newui_resources.Load(is_long ? NEWUI_LBTN_FILE : NEWUI_BTN_FILE);
   m_litbkg = Newui_resources.Load(is_long ? NEWUI_LCHKBTNLIT_FILE : NEWUI_CHKBTNLIT_FILE);
 
-  UIRadioButton::Create(wnd, prev_rb, id, &UITextItem(""), x, y, 10, 8, UIF_FIT);
+  UITextItem item{""};
+  UIRadioButton::Create(wnd, prev_rb, id, &item, x, y, 10, 8, UIF_FIT);
   newuiButton::InitStates(name, is_long);
 }
 

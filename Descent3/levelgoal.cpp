@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/levelgoal.cpp $
  * $Revision: 50 $
  * $Date: 6/23/99 5:34p $
@@ -722,9 +740,9 @@ bool levelgoals::SaveLevelGoalInfo(CFILE *fptr) {
     int len;
     int num_items;
     int j;
-    int priority;
-    char g_list;
-    int status;
+    int priority = 0;
+    char g_list = 0;
+    int status = 0;
 
     Level_goals.GoalStatus(i, LO_GET_SPECIFIED, &status);
     cf_WriteInt(fptr, status);
@@ -767,7 +785,7 @@ bool levelgoals::SaveLevelGoalInfo(CFILE *fptr) {
     num_items = Level_goals.GoalGetNumItems(i);
     cf_WriteShort(fptr, num_items);
     for (j = 0; j < num_items; j++) {
-      char type;
+      char type = 0;
       int handle;
       bool f_done;
 

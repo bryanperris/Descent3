@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/inetfile/Chttpget.cpp $
  * $Revision: 1.4 $
  * $Date: 2001/01/13 21:48:46 $
@@ -218,7 +236,7 @@ void ChttpGet::PrepSocket(char *URL) {
   // then keep reading until you find the first /
   // when you found it, you have the host and dir
   char *filestart = NULL;
-  char *dirstart;
+  char *dirstart = NULL;
   for (int i = strlen(pURL); i >= 0; i--) {
     if (pURL[i] == '/') {
       if (!filestart) {
@@ -586,7 +604,7 @@ char *ChttpGet::GetHTTPLine() {
 
 unsigned int ChttpGet::ReadDataChannel() {
   char sDataBuffer[4096]; // Data-storage buffer for the data channel
-  int nBytesRecv;         // Bytes received from the data channel
+  int nBytesRecv = 0;     // Bytes received from the data channel
 
   fd_set wfds;
 

@@ -1,3 +1,21 @@
+/*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "aipath.h"
 #include "gamepath.h"
 #include "AIGoal.h"
@@ -116,7 +134,7 @@ bool AIFindAltPath(object *obj, int i, int j, float *dist) {
       if (BOA_LockedDoor(obj, next_room))
         continue;
 
-      int next_portal;
+      int next_portal = 0;
 
       if (BOA_INDEX(next_room) != BOA_INDEX(cur_node->roomnum)) {
         next_portal = BOA_DetermineStartRoomPortal(BOA_INDEX(next_room), NULL, BOA_INDEX(cur_node->roomnum), NULL,
@@ -757,7 +775,7 @@ done:
 
 void AIGenerateAltBOAPath(vector *start_pos, vector *end_pos, ai_path_info *aip, int *slot, int *cur_node, int handle) {
   int x;
-  vector *pos;
+  vector *pos = NULL;
 
   for (x = 0; x < AIAltPathNumNodes - 1; x++) {
     int cur_room = AIAltPath[x];

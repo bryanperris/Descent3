@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/render.cpp $
  * $Revision: 325 $
  * $Date: 9/10/01 5:16p $
@@ -919,7 +937,7 @@ void BuildRoomListSub(int start_room_num, clip_wnd *wnd, int depth) {
       for (i = 0; i < num_points; i++) {
         g3_ProjectPoint(&Combined_portal_points[i]);
       }
-      int left, top, right, bottom;
+      int left = 0, top = 0, right = 0, bottom = 0;
       clip_wnd combine_wnd;
       combine_wnd.right = combine_wnd.bot = 0.0;
       combine_wnd.left = Render_width;
@@ -1567,7 +1585,7 @@ void RenderFogFaces(room *rp) {
       g3Point *p = &pointbuffer[vn];
       pointlist[vn] = p;
 
-      float mag;
+      float mag = 0;
 
       if (Room_fog_plane_check == 0) {
         // Outside of the room

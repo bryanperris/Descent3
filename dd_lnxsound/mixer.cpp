@@ -1,3 +1,21 @@
+/*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include <memory.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -126,7 +144,7 @@ void software_mixer::StreamMixer(char *ptr, int len) {
       int samples_played = cur_buf->play_info->m_samples_played;
       short *sample_16bit;
       unsigned char *sample_8bit;
-      int np_sample_length;
+      int np_sample_length = 0;
       int sample_length;
       int loop_start;
       int loop_end;

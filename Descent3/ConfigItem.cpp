@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/main/ConfigItem.cpp $
  * $Revision: 19 $
  * $Date: 4/26/99 9:11p $
@@ -164,12 +182,14 @@ bool ConfigItem::Create(NewUIGameWindow *parentwnd, int type, int flags, int x, 
     Int3();
   }
 
-  if (type == CIT_SLIDER) // slider's need to have the label centered vertically
-    m_tLabel.Create(parentwnd, &UITextItem(label, UICOL_TEXT_NORMAL), x, y + 7, UIF_FIT);
-  else {
+  if (type == CIT_SLIDER) { // slider's need to have the label centered vertically
+    UITextItem item{label, UICOL_TEXT_NORMAL};
+    m_tLabel.Create(parentwnd, &item, x, y + 7, UIF_FIT);
+  } else {
     if (!(m_iFlags & CIF_USEGROUP)) {
       // create a regular label
-      m_tLabel.Create(parentwnd, &UITextItem(label, UICOL_TEXT_NORMAL), x, y, UIF_FIT);
+      UITextItem item{label, UICOL_TEXT_NORMAL};
+      m_tLabel.Create(parentwnd, &item, x, y, UIF_FIT);
     } else {
       // save the label text
       m_labeltext = mem_strdup(label);
@@ -582,7 +602,8 @@ void ConfigItem::UpdateSlider(int index, bool call_callback) {
   default:
     Int3(); // Get Jeff
   }
-  m_tLabel2.SetTitle(&UITextItem(temp, UICOL_TEXT_NORMAL));
+  UITextItem item{temp, UICOL_TEXT_NORMAL};
+  m_tLabel2.SetTitle(&item);
 }
 
 void ConfigItem::UpdateOnOffButton(int index) {
@@ -701,7 +722,7 @@ void ConfigItem::Add(int count, ...) {
     ASSERT((m_iInitial >= 0) && (m_iInitial < m_iNumIDs));
     m_rbList[m_iInitial]->Activate();
     break;
-  case CIT_SLIDER:
+  case CIT_SLIDER: {
     // only 1 slider per config item
     ASSERT(m_sCount == 0);
     // we need 1 slider
@@ -735,9 +756,11 @@ void ConfigItem::Add(int count, ...) {
         strncat(temp, "%", sizeof(temp) - strlen(temp) - 1);
       break;
     }
-    m_tLabel2.Create(m_hWnd, &UITextItem(temp, UICOL_TEXT_NORMAL), m_X + 155, m_Y + 7, UIF_FIT);
+    UITextItem item{temp, UICOL_TEXT_NORMAL};
+    m_tLabel2.Create(m_hWnd, &item, m_X + 155, m_Y + 7, UIF_FIT);
     m_sList[0]->SetSelectChangeCallback(CISliderCallback, this);
     break;
+  }
   case CIT_ONOFFBUTTON:
     // only 1 on/off button per config item
     ASSERT(m_bCount == 0);

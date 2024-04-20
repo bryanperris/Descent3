@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/WeaponFire.cpp $
  * $Revision: 279 $
  * $Date: 9/20/01 5:33p $
@@ -2207,7 +2225,7 @@ float Last_fusion_damage_time = 0;
 // Does that crazy fusion effect, including damaging/shaking your ship
 void DoFusionEffect(object *objp, int weapon_type) {
   float norm;
-  int move;
+  int move = 0;
 
   ASSERT(objp->type == OBJ_PLAYER);
   ASSERT((weapon_type == PW_PRIMARY) || (weapon_type == PW_SECONDARY));

@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/demofile.cpp $
  * $Revision: 74 $
  * $Date: 10/21/01 7:15p $
@@ -1521,25 +1539,30 @@ void DemoPostPlaybackMenu(void) {
   char sztemp[200] = "";
 
   window.Create(0, 0, DEMO_MENU_WIDTH, DEMO_MENU_HEIGHT, UIF_PROCESS_MENU | UIF_CENTER | NUWF_TITLELARGE);
-  wndtitle.Create(&window, &UITextItem(TXT_DEMO_PLAY_OPTIONS), 0, cury, UIF_CENTER | UIF_FIT);
+  UITextItem itemTitle{TXT_DEMO_PLAY_OPTIONS};
+  wndtitle.Create(&window, &itemTitle, 0, cury, UIF_CENTER | UIF_FIT);
   cury += 30;
   if (Demo_play_fast) {
     snprintf(sztemp, sizeof(sztemp), TXT_MINFPS, (float)1 / Max_frametime);
-    fps_min.Create(&window, &UITextItem(sztemp), 0, cury, UIF_CENTER | UIF_FIT);
+    UITextItem itemFpsMin{sztemp};
+    fps_min.Create(&window, &itemFpsMin, 0, cury, UIF_CENTER | UIF_FIT);
     cury += 20;
     snprintf(sztemp, sizeof(sztemp), TXT_MAXFPS, (float)1 / Min_frametime);
-    fps_max.Create(&window, &UITextItem(sztemp), 0, cury, UIF_CENTER | UIF_FIT);
+    UITextItem itemFpsMax{sztemp};
+    fps_max.Create(&window, &itemFpsMax, 0, cury, UIF_CENTER | UIF_FIT);
     cury += 20;
     snprintf(sztemp, sizeof(sztemp), TXT_AVGFSP, (float)1 / (Avg_frametime / Frames_counted));
-    fps_avg.Create(&window, &UITextItem(sztemp), 0, cury, UIF_CENTER | UIF_FIT);
+    UITextItem itemFpsAvg{sztemp};
+    fps_avg.Create(&window, &itemFpsAvg, 0, cury, UIF_CENTER | UIF_FIT);
     cury += 20;
   }
   // cury+=20;
-  loop_btn.Create(&window, UID_LOOPING, &UITextItem(TXT_PLAYLOOPING), 0, cury, BTN_WIDTH * 1.5, 32,
-                  UIF_CENTER | UIF_FIT);
+  UITextItem itemLooping{TXT_PLAYLOOPING};
+  loop_btn.Create(&window, UID_LOOPING, &itemLooping, 0, cury, BTN_WIDTH * 1.5, 32, UIF_CENTER | UIF_FIT);
   cury += 35;
 
-  ok_btn.Create(&window, UID_OK, &UITextItem(TXT_DONE), 0, DEMO_MENU_HEIGHT - 70, BTN_WIDTH, 32, UIF_CENTER | UIF_FIT);
+  UITextItem itemDone{TXT_DONE};
+  ok_btn.Create(&window, UID_OK, &itemDone, 0, DEMO_MENU_HEIGHT - 70, BTN_WIDTH, 32, UIF_CENTER | UIF_FIT);
 
   window.Open();
 

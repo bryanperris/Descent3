@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/main/LoadLevel.cpp $
  * $Revision: 346 $
  * $Date: 7/09/01 4:24p $
@@ -2506,7 +2524,7 @@ int ReadRoom(CFILE *ifile, room *rp, int version) {
     rp->mirror_face = -1;
 
   if ((rp->flags & RF_DOOR)) {
-    int doornum, flags = 0, keys = 0, position = 0.0;
+    int doornum = 0, flags = 0, keys = 0, position = 0.0;
 
     if (version >= 28 && version <= 32) {
       doornum = door_xlate[cf_ReadInt(ifile)];
@@ -2747,7 +2765,7 @@ void ReadLightmapChunk(CFILE *fp, int version) {
 
   int nummaps;
   int i, t;
-  ushort *ded_dummy_data;
+  ushort *ded_dummy_data = NULL;
 
   if (Dedicated_server) {
     ded_dummy_data = (ushort *)mem_malloc(128 * 128 * 2);

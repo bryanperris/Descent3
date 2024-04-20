@@ -1,3 +1,21 @@
+/*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include <assert.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -596,7 +614,7 @@ static void LinuxSoundMixWithVolume(LnxSoundBuffer *dsb, unsigned char *buf, uns
 }
 
 static unsigned int LinuxSoundMixNormalize(LnxSoundBuffer *dsb, unsigned char *buf, unsigned int len) {
-  unsigned int i, size, ipos, ilen, fieldL, fieldR;
+  unsigned int i, size, ipos, ilen, fieldL = 0, fieldR = 0;
   unsigned char *ibp, *obp;
   unsigned int iAdvance = dsb->wfx.nBlockAlign;
   unsigned int oAdvance = LnxBuffers[0]->wfx.nBlockAlign;

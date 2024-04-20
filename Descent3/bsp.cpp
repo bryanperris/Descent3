@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/main/bsp.cpp $
  * $Revision: 32 $
  * $Date: 4/19/00 10:18a $
@@ -301,7 +319,7 @@ int ClassifyPolygon(bspplane *plane, bsppolygon *poly) {
 // Tries to split a polygon across a plane
 int SplitPolygon(bspplane *plane, bsppolygon *testpoly, bsppolygon **frontpoly, bsppolygon **backpoly) {
   float dists[256], t;
-  int numvert, numfront, numback, i, codes[256];
+  int numvert, numfront, numback, i, codes[256] = {};
   vector *frontvert[256], *backvert[256], *polyvert[256];
   vector *vertptr1, *vertptr2;
   vector delta, *newvert[256];

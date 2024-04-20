@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/DMFC.h $
  * $Revision: 1.3 $
  * $Date: 2004/02/09 04:14:49 $
@@ -569,6 +587,8 @@ typedef struct {
   int kills[2], deaths[2], suicides[2];
 } t_dstat;
 
+struct PInfo;
+
 typedef struct {
   slot_state state;                 // state of this slot
   char callsign[MAX_CALLSIGN_SIZE]; // Player's callsign
@@ -584,8 +604,8 @@ typedef struct {
   void *user_info;          // Multiplayer Mod user defined struct pointer
   int user_info_size;       // Size of user_info;
 
-  sbyte team;  // The player's team (for when they reconnect)
-  void *pinfo; // Pointer to player info (who killed whom)
+  sbyte team;   // The player's team (for when they reconnect)
+  PInfo *pinfo; // Pointer to player info (who killed whom)
 } player_record;
 
 #define MIF_INCLUDENONE                                                                                                \

@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/main/huddisplay.cpp $
  * $Revision: 59 $
  * $Date: 4/19/00 5:16p $
@@ -351,7 +369,7 @@ void RenderHUDInventory(tHUDItem *item) {
     return;
 
   int y;
-  float img_w;
+  float img_w = 0;
 
   if (cur_sel != -1) {
     ASSERT(cur_sel < MAX_UNIQUE_INVEN_ITEMS);
@@ -689,7 +707,7 @@ void RenderHUDSecondary(tHUDItem *item) {
 
 void RenderHUDShipStatus(tHUDItem *item) {
   float clk_time_frame, inv_time_frame;
-  ubyte clk_alpha, inv_alpha;
+  ubyte clk_alpha = 0, inv_alpha;
 
   //	render text status
   if (Objects[Players[Player_num].objnum].effect_info->type_flags & EF_CLOAKED) {

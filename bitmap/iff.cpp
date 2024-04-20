@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/bitmap/iff.cpp $
  * $Revision: 8 $
  * $Date: 10/21/99 9:28p $
@@ -181,7 +199,7 @@ int bm_iff_parse_bmhd(CFILE *ifile, uint len, iff_bitmap_header *bmheader) {
 //  the buffer pointed to by raw_data is stuffed with a pointer to decompressed pixel data
 int bm_iff_parse_body(CFILE *ifile, int len, iff_bitmap_header *bmheader) {
   ubyte *p = bmheader->raw_data;
-  int width, depth, done = 0;
+  int width = 0, depth = 0, done = 0;
 
   if (bmheader->type == TYPE_PBM) {
     width = bmheader->w;

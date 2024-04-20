@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/dedicated_server.cpp $
  * $Revision: 1.5 $
  * $Date: 2004/03/11 03:46:52 $
@@ -702,8 +720,8 @@ void ParseLine(char *srcline, char *command, char *operand, int cmdlen, int oprl
 // Called once per frame for the dedicated server
 void DoDedicatedServerFrame() {
   char str[255];
-  char command[255]; // operand
-  char operand[255]; // operand
+  char command[255] = {}; // operand
+  char operand[255];      // operand
 
   ListenDedicatedSocket();
   DedicatedReadTelnet();
@@ -973,8 +991,8 @@ void DedicatedReadTelnet(void) {
           }
           send(conn->sock, "\r\n", strlen("\r\n"), 0);
           if (conn->validated) {
-            char command[255]; // operand
-            char operand[255]; // operand
+            char command[255] = {}; // operand
+            char operand[255];      // operand
 
             if (!stricmp(conn->input, "logout")) {
               // log the connection out

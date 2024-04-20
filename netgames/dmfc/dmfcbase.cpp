@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/dmfc/dmfcbase.cpp $
  * $Revision: 1.1.1.1 $
  * $Date: 2003/08/26 03:57:20 $
@@ -2168,7 +2186,7 @@ PInfo *DMFCBase::FindPInfo(int pnum) {
   player_record *pr = GetPlayerRecordByPnum(pnum);
   if (!pr)
     return NULL;
-  return (PInfo *)pr->pinfo;
+  return pr->pinfo;
 }
 
 // DMFCBase::UpdatePInfo
@@ -2226,7 +2244,7 @@ void DMFCBase::ResetPInfo(void) {
   for (int i = 0; i < MAX_PLAYER_RECORDS; i++) {
     player_record *pr = GetPlayerRecord(i);
     if (pr && pr->pinfo) {
-      ((PInfo *)pr->pinfo)->ResetAll();
+      pr->pinfo->ResetAll();
     }
   }
 }
@@ -2344,7 +2362,7 @@ bool DMFCBase::FindPInfoStatFirst(int slot, tPInfoStat *stat) {
   if (!pr || pr->state == STATE_EMPTY || !pr->pinfo)
     return false;
 
-  killer = ((PInfo *)pr->pinfo)->GetFirstKiller();
+  killer = pr->pinfo->GetFirstKiller();
   victim = NULL;
 
   if (!killer) {
@@ -2412,7 +2430,7 @@ bool DMFCBase::FindPInfoStatNext(tPInfoStat *stat) {
   if (!pr || pr->state == STATE_EMPTY || !pr->pinfo)
     return false;
 
-  killer = ((PInfo *)pr->pinfo)->GetNextKiller();
+  killer = pr->pinfo->GetNextKiller();
   victim = NULL;
 
   if (!killer) {
@@ -2446,7 +2464,7 @@ bool DMFCBase::FindPInfoStatNext(tPInfoStat *stat) {
   deaths = 0;
   dpr = GetPlayerRecord(killer->slot);
   if (dpr && dpr->state != STATE_EMPTY && dpr->pinfo) {
-    victim = ((PInfo *)dpr->pinfo)->GetKillerInfo(slot);
+    victim = dpr->pinfo->GetKillerInfo(slot);
   }
 
   if (victim)
@@ -3379,7 +3397,7 @@ void DMFCBase::CheckPInfo() {
       tPKillerInfo *node;
 
       ASSERT(pr->pinfo != NULL);
-      node = ((PInfo *)pr->pinfo)->GetFirstKiller();
+      node = pr->pinfo->GetFirstKiller();
 
       while (node) {
         ASSERT(node->slot >= 0 && node->slot < 64);

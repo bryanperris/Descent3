@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/Main/physics/FindIntersection.cpp $
  * $Revision: 231 $
  * $Date: 10/25/99 1:17a $
@@ -2710,8 +2728,8 @@ int fvi_FindIntersection(fvi_query *fq, fvi_info *hit_data, bool no_subdivision)
 
       // Number of whole subdivisions
       int num_subdivisions = vm_VectorDistance(fq->p0, fq->p1) / MIN_LONG_RAY;
-      vector sub_dir; // Direction and magnitude of each subdivision
-      int s_hit_type; // Sub-divided hit type
+      vector sub_dir;     // Direction and magnitude of each subdivision
+      int s_hit_type = 0; // Sub-divided hit type
 
       sub_dir = *fq->p1 - *fq->p0;  // Direction of movement
       vm_NormalizeVector(&sub_dir); // Normalize it

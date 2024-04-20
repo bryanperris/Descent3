@@ -1,4 +1,22 @@
 /*
+* Descent 3 
+* Copyright (C) 2024 Parallax Software
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
  * $Logfile: /DescentIII/main/pilot.cpp $
  * $Revision: 175 $
  * $Date: 3/20/00 12:07p $
@@ -2431,7 +2449,7 @@ bool UpdateGraphicsListbox(tCustomListInfo *cust_bmps, newuiListBox *lb, char *s
   // get a list of custom textures
   int count = 0;
   bool ok_to_get_files;
-  int total_files;
+  int total_files = 0;
 
   // build list
   char oldpath[_MAX_PATH];
@@ -2864,11 +2882,13 @@ bool PltSelectShip(pilot *Pilot) {
   taunts_lists.taunt_d = sheet->AddComboBox(-5, 0);
 
   // Ship window
-  ship_win.Create(&window, &UITextItem(""), 290, 50, 180, 140, 0);
+  UITextItem itemShipWindow{""};
+  ship_win.Create(&window, &itemShipWindow, 290, 50, 180, 140, 0);
 
   // Bitmap display of selected logo
   bmpwindow = &bmp_win;
-  bmp_win.Create(&window, &UITextItem(""), UI_BORDERSIZE + 200, 53, 42, 42, 0);
+  UITextItem itemLogo{""};
+  bmp_win.Create(&window, &itemLogo, UI_BORDERSIZE + 200, 53, 42, 42, 0);
 
   // Get all the audio files and put them into the lists
   UpdateAudioTauntBoxes(&cust_snds, taunts_lists.taunt_a, taunts_lists.taunt_b, taunts_lists.taunt_c,
