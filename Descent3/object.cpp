@@ -1472,7 +1472,7 @@ void ObjUnlink(int objnum) {
   if (OBJECT_OUTSIDE(obj)) {
     int cellnum = CELLNUM(obj->roomnum);
 
-    terrain_segment *seg = &Terrain_seg[cellnum];
+    terrain_segment *seg = &Terrain_seg[cellnum & 0xFFFF];
 
     if (obj->prev == -1)
       seg->objects = obj->next;
