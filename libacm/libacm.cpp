@@ -353,29 +353,29 @@ uint32 InternalAudioDecoder::Read(void *pBuffer, uint32 amount) {
   uint32 totalBytesRead = 0;
   uint8 *pBuf = reinterpret_cast<uint8 *>(pBuffer);
 
-  do {
-    uint32 numWords = amount >> 1;
-    if (m_streamPos + numWords > m_acm.m_sampleCount) {
-      // Don't read past the end of file
-      numWords = m_acm.m_sampleCount - m_streamPos;
-    }
+//   do {
+//     uint32 numWords = amount >> 1;
+//     if (m_streamPos + numWords > m_acm.m_sampleCount) {
+//       // Don't read past the end of file
+//       numWords = m_acm.m_sampleCount - m_streamPos;
+//     }
 
-    if (m_acm.m_numChannels > 1) {
-      // Read full channel data
-      numWords -= numWords & 1;
-    }
+//     if (m_acm.m_numChannels > 1) {
+//       // Read full channel data
+//       numWords -= numWords & 1;
+//     }
 
-    if (numWords == 0)
-      break;
+//     if (numWords == 0)
+//       break;
 
-    uint32 res = InternalRead(pBuf, numWords << 1);
-    if (res == 0)
-      break;
+//     uint32 res = InternalRead(pBuf, numWords << 1);
+//     if (res == 0)
+//       break;
 
-    pBuf += res;
-    amount -= res;
-    totalBytesRead += res;
-  } while (amount > 0);
+//     pBuf += res;
+//     amount -= res;
+//     totalBytesRead += res;
+//   } while (amount > 0);
 
   return totalBytesRead;
 }

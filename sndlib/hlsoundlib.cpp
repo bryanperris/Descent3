@@ -768,7 +768,7 @@ void hlsSystem::BeginSoundFrame(bool f_in_game) {
           vector virtual_pos;
           vector virtual_vel;
           float adjusted_volume;
-          f_audible = ComputePlayInfo(i, &virtual_pos, &virtual_vel, &adjusted_volume);
+        //   f_audible = ComputePlayInfo(i, &virtual_pos, &virtual_vel, &adjusted_volume);
           if (!f_audible) {
             m_ll_sound_ptr->StopSound(m_sound_objects[i].m_sound_uid, SKT_STOP_IMMEDIATELY);
             m_sound_objects[i].m_sound_uid = 0;
@@ -1003,7 +1003,7 @@ bool hlsSystem::Emulate3dSound(int sound_obj_index) {
   vector virtual_pos;
   vector virtual_vel;
   float adjusted_volume;
-  f_audible = ComputePlayInfo(sound_obj_index, &virtual_pos, &virtual_vel, &adjusted_volume);
+//   f_audible = ComputePlayInfo(sound_obj_index, &virtual_pos, &virtual_vel, &adjusted_volume);
 
   if (f_audible) {
     pos_state cur_pos;
